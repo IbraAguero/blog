@@ -12,3 +12,69 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Article {
+  id String @id @default(uuid())
+  title String
+  subtitle String?
+  content String
+  imageUrl String?
+  userId String
+
+  comments Comment[]
+
+  user User @relation(fields: [userId],references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id String @id @default(uuid())
+  content String
+  articleId String
+  userId String
+
+  article Article @relation(fields: [articleId], references: [id],onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id],onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+}
+
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?
+  image         String?
+  emailVerified String?
+
+  accounts Account[]
+  articles Article[]
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
