@@ -11,8 +11,12 @@ export const getArticles = async () => {
     const articles = await db.article.findMany({
       include: {
         user: { select: { name: true } },
-        comments: { include: { user: { select: { name: true } } } },
+        comments: {
+          include: { user: { select: { name: true } } },
+          orderBy: { createdAt: "desc" },
+        },
       },
+      orderBy: { createdAt: "desc" },
     });
 
     return articles;
@@ -33,8 +37,6 @@ export const addArticle = async (values: z.infer<typeof articleSchema>) => {
         error: "datos invalidos",
       };
     }
-
-    console.log(session);
 
     if (!session?.user?.userId) {
       return {
@@ -72,15 +74,20 @@ export const addComment = async (articleId: string, content: string) => {
       };
     }
 
-    await db.comment.create({
+    const newComment = await db.comment.create({
       data: {
         content: content,
         articleId: articleId,
         userId: session.user.userId,
       },
+      include: {
+        user: { select: { name: true } },
+      },
     });
+
     revalidatePath("/");
+    return newComment;
   } catch (error) {
-    console.log(error);
+    return { success: false, error: error };
   }
 };

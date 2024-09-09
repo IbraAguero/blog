@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={cn("font-sans dark", fontSans.variable)}>
         <Navbar />
         {children}
+        <Toaster />
       </body>
     </html>
   );

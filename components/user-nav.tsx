@@ -13,9 +13,10 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 
 interface navbarInterface {
   user: {
-    name: string;
+    name?: string | undefined | null;
     email: string;
     image?: string;
+    userId: string;
   };
 }
 
@@ -24,7 +25,7 @@ const UserNav = async ({ user }: navbarInterface) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarFallback>{user.name[0]}</AvatarFallback>
+          <AvatarFallback>{user.name?.[0]}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
