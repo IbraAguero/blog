@@ -25,7 +25,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center">
-      <section className="container w-[800px] h-full min-h-[calc(100vh-5rem)] p-10 border-x">
+      <section className="container h-full min-h-[calc(100vh-5rem)] p-10 border-x">
         <div className="flex justify-between mb-4">
           <h2 className="text-2xl font-bold">Articulos</h2>
           {session && (
@@ -39,14 +39,13 @@ export default async function Home() {
             <Card key={article.id} className="p-4 border rounded-xl">
               <CardHeader className="flex flex-row justify-between items-baseline">
                 <div>
-                  <CardTitle>{article.title}</CardTitle>
+                  <CardTitle className="text-xl font-semibold">
+                    {article.title}
+                  </CardTitle>
                   <p className="text-sm text-muted-foreground">
                     Por {article.user.name}
                   </p>
                 </div>
-                <span className="text-sm">
-                  {new Date(article.createdAt).toLocaleString()}
-                </span>
               </CardHeader>
               <CardContent>
                 <p>{article.content}</p>
