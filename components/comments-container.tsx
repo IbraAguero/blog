@@ -32,7 +32,7 @@ const CommentsContainer = ({
   const [commentList, setCommentList] = useState(comments);
 
   useEffect(() => {
-    const socket = io("/");
+    const socket = io("https://comments-socketio-production.up.railway.app");
 
     socket.on("comment", (comment) => {
       setCommentList((prevComments) => [comment, ...prevComments]);
@@ -45,7 +45,7 @@ const CommentsContainer = ({
 
   const handleAddComment = async () => {
     if (session) {
-      const socket = io("/");
+      const socket = io("https://comments-socketio-production.up.railway.app");
       const data = await addComment(articleId, newComment);
 
       socket.emit("newComment", data);
