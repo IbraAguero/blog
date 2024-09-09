@@ -38,14 +38,6 @@ const UserNav = async ({ user }: navbarInterface) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>Perfil</DropdownMenuItem>
-          <DropdownMenuItem>Configuracion</DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/usuarios">Usuarios</Link>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
         <ButtonLogout />
       </DropdownMenuContent>
     </DropdownMenu>
