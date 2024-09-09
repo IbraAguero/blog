@@ -1,20 +1,17 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 import ButtonLogout from "./button-logout";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
 interface navbarInterface {
   user: {
-    name?: string | undefined | null;
-    email: string;
+    name?: string | null;
+    email: string | null;
     image?: string;
     userId: string;
   };

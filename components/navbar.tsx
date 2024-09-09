@@ -11,7 +11,11 @@ const Navbar = async () => {
       <h1 className="text-2xl font-bold">
         <Link href="/">Blog</Link>
       </h1>
-      {session?.user ? <UserNav user={session?.user} /> : <ButtonGoogle />}
+      {session?.user ? (
+        <UserNav user={session.user as { email: string; userId: string }} />
+      ) : (
+        <ButtonGoogle />
+      )}
     </nav>
   );
 };
